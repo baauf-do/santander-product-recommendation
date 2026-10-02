@@ -1,0 +1,21 @@
+# du lieu Kaggle (tai rieng tu trang cuoc thi, ~2.5GB) - ke ca ban trong archive/du_lieu_goc
+*.csv
+*.zip
+
+# cache cua pipeline cu (archive/pipeline_cu/cache, ~4GB)
+cache/
+
+# file phu khi bien dich LaTeX
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.synctex.gz
+
+# python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+train_ver2.csv
