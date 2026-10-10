@@ -1104,3 +1104,18 @@ Kiểm chứng chéo trên Lasso: 1/λ_max(H_S) ≈ 65/L, và FISTA hỏng đún
 | `ss_gd_nesterov_*` | cặp cùng bước 0.5, 1, 2, 6/L ("6/L (best Nesterov)") + **GD 30/L vẽ riêng** ("best GD; không có cặp"), vì Nesterov đã không hội tụ từ 24/L nên không có 30/L |
 | `ss_gd_bt_*`, `ss_sgd_gd_*`, `tongket_*`, bảng log-loss | tự lấy GD 30/L |
 | Markdown | 6c (danh sách bước chạy bổ sung), 6e (setting: GD 30/L, Nesterov 6/L kèm ghi chú 8/L, nguồn gốc số liệu), đoạn GD vs backtracking (hội tụ tới 30/L, 34/L thì không), đoạn GD vs Nesterov |
+
+## 33. `ket_luan.md`: thêm cột "luôn ≤ ε từ đó" vào bảng chi tiết
+
+- Mục 4 của `ket_luan.md` có thêm cột **Luôn ≤ ε từ**: thời điểm mà từ đó trở đi F − F* luôn ≤ 10⁻⁶ (subgradient: 10⁻⁵). Best được đánh dấu theo hai cách: **★** = lần đầu chạm ε (định nghĩa notebook đang dùng), **☆** = luôn ≤ ε.
+- Bảng sinh thẳng từ `kq_6c_day_du.pkl` (98 setup) bằng script `bang_chi_tiet.py` (thư mục tạm). Notebook không đổi.
+- **Hai cách chọn khác nhau ở 3 thuật toán** (ε = 10⁻⁶):
+
+  | Thuật toán | ★ lần đầu chạm | ☆ luôn ≤ ε từ đó |
+  |---|---|---|
+  | Nesterov | 6/L, 7.7 giây | **8/L, 8.8 giây** (6/L: 9.5 giây) |
+  | SGD | B = 4096, 1/√k, α₀ = 1, 111.5 giây | B = 1024, 1/√k, α₀ = 0.2, 526.0 giây |
+  | FISTA | 32/L, 9.4 giây | 6/L, 11.9 giây (32/L: 16.4 giây) |
+
+- GD cố định, backtracking, Newton, ISTA và subgradient trùng nhau theo cả hai cách.
+- **Sửa lại mục 27.3:** khi đó bảng ghi Nesterov "luôn ≤ ε" vẫn là 6/L, vì lúc đó chưa có setup 8/L. Với lưới hiện tại thì là 8/L.
